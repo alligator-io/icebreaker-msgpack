@@ -1,0 +1,33 @@
+{
+  "name": "icebreaker-msgpack",
+  "version": "0.1.0",
+  "description": "MessagePack v5 as pull-stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alligator-io/pull-msgpack.git"
+  },
+  "dependencies": {
+    "bl": "0.9.3",
+    "icebreaker": "^0.3.0",
+    "looper": "^3.0.0",
+    "msgpack5": "^1.3.5"
+  },
+  "devDependencies": {
+    "tape": "^2.13.3"
+  },
+  "keywords": [
+    "msgpack",
+    "pull-stream",
+    "streams"
+  ],
+  "author": "Markus Wunderlin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alligator-io/pull-msgpack/issues"
+  },
+  "homepage": "https://github.com/alligator-io/pull-msgpack"
+}
