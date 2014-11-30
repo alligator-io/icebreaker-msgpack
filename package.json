@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alligator-io/pull-msgpack.git"
+    "url": "https://github.com/alligator-io/icebreaker-msgpack.git"
   },
   "dependencies": {
     "bl": "0.9.3",
@@ -27,7 +27,7 @@
   "author": "Markus Wunderlin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alligator-io/pull-msgpack/issues"
+    "url": "https://github.com/alligator-io/icebreaker-msgpack/issues"
   },
-  "homepage": "https://github.com/alligator-io/pull-msgpack"
+  "homepage": "https://github.com/alligator-io/icebreaker-msgpack"
 }
