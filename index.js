@@ -138,8 +138,6 @@ _.mixin({
             read(abort, function next(end, chunk) {
               if (end) {
                 if (ended) return
-
-                ended = end
                 return read(ended = end, callback)
               }
 
