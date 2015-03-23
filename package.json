@@ -1,6 +1,6 @@
 {
   "name": "icebreaker-msgpack",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MessagePack v5 as pull-stream",
   "main": "index.js",
   "scripts": {
@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "bl": "^0.9.3",
-    "icebreaker": "^0.4.0",
+    "icebreaker": "^0.5.0",
     "looper": "^3.0.0",
-    "msgpack5": "^1.3.5"
+    "msgpack5": "^2.0.0"
   },
   "devDependencies": {
     "tape": "^2.13.3"
