@@ -2,7 +2,6 @@ ui: tape
 capabilities:
   record-video: false
   record-screenshots: false
-  avoid-proxy: true
 browsers:
   - name: android
     version: [4.4,5.0]
@@ -22,4 +21,4 @@ browsers:
     version: [6.1,7.1,8.1..latest]
   - name: opera
     version: latest
-    platform: Windows 2003
+    platform: Linux
