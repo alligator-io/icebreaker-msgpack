@@ -2,6 +2,10 @@ var test = require('tape')
 var _ = require('icebreaker')
 require('./index.js')
 
+function log(item){
+ console.log(JSON.stringify(item))
+}
+
 test('encode/decode',function(t){
   var testArr  = ['test1','test2','test3',{a:'b'},1,2,3,new Buffer('test')]
 
@@ -10,7 +14,7 @@ test('encode/decode',function(t){
       _.chain().msgpack().encode().decode().collect(function(err,data){
         t.equal(err,null)
         t.same(data,testArr)
-        console.log(data)
+        log(data)
         t.end()
       })
   )
@@ -47,7 +51,7 @@ test('encode/decode custom type with a codec',function(t){
     .collect(function(err,data){
       t.equal(err,null)
       t.same(data,testArr)
-      console.log(data)
+      log(data)
       t.end()
     })
   )
@@ -96,7 +100,7 @@ test('encode/decode custom type with a encoder/decoder',function(t){
     .decode()
     .collect(function(err,data){
       t.equal(err,null)
-      console.log(data)
+      log(data)
       t.same(data,testArr)
       t.end()
     })
