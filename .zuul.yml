@@ -1,10 +1,7 @@
 ui: tape
 capabilities:
   record-video: false
-  record-screenshots: true
-  max-duration: 1800
-  command-timeout": 300
-  idle-timeout: 120
+  record-screenshots: false
 browsers:
   - name: android
     version: [4.4,5.0]
