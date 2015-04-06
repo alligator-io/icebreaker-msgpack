@@ -121,7 +121,7 @@ _.mixin({
     encode : function() {
       return _.asyncMap(function(chunk, callback) {
         try {
-          callback(null, msgpack.encode(chunk,true))
+          callback(null, msgpack.encode(chunk,true).slice(0))
         }
         catch (err) {
           callback(err)
