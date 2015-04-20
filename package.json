@@ -15,11 +15,11 @@
   },
   "dependencies": {
     "bl": "^0.9.3",
-    "icebreaker": "^0.6.1",
     "looper": "^3.0.0",
     "msgpack5": "^2.0.0"
   },
   "devDependencies": {
+    "icebreaker": "^0.6.1",
     "tape": "3.5.0",
     "zuul": "2.1.1"
   },
