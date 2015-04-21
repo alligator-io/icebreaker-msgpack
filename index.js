@@ -3,10 +3,6 @@ var bl = require('bl')
 var looper = require('looper')
 var _ = require('icebreaker')
 
-function isFunction(obj) {
-  return typeof obj === 'function'
-}
-
 _.mixin({
   msgpack: {
     register: msgpack.register,
