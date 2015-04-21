@@ -25,17 +25,17 @@ _.mixin({
 
     decode: _.through(function (read) {
       return function (abort, callback) {
-        read(abort, function(end, chunk) {
-          if(end) return callback(end)
+        read(abort, function (end, chunk) {
+          if (end) return callback(end)
           var buffer = bl().append(chunk)
 
           looper(function (consume) {
             if (buffer.length > 0 && !end) {
               try {
                 callback(null, msgpack.decode(buffer))
-                return consume()
+                consume()
               } catch (err) {
-                return read(err,callback)
+                read(err, callback)
               }
             }
           })
