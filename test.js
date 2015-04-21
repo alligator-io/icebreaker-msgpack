@@ -21,27 +21,79 @@ test('encode/decode',function(t){
 
 })
 
-test('encode/decode custom type with a codec',function(t){
-  function codecType(value){
+test('encode/decode custom type',function(t){
+  function customType(value){
     this.value = value
   }
 
-  _.msgpack.register(
-    _.msgpack.codec(0x41,codecType,
-      function(){
-       return _.map(function(obj){  // through stream
-         return obj.value
-       })
-      },
-      function(){
-        return _(_.map(function(obj){ // through stream
-          return new codecType(obj.toString())
-        }))
-      }
-    )
-  )
+_.msgpack.register(0x41,customType,
+  function(obj){
+    return new Buffer(obj.value)
+  },
+  function(obj){
+    return new customType(obj.toString())
+  }
+)
 
-  var testArr = [new codecType('A'),new codecType('B'), new codecType('C')]
+var testArr = [new customType('A'),new customType('B'), new customType('C')]
+  _(
+    testArr,
+    _.chain()
+    .msgpack()
+    .encode()
+    .decode()
+    .collect(function(err,data){
+      console.log(err,data)
+      t.equal(err,null)
+      t.same(data,testArr)
+      log(data)
+      t.end()
+    })
+  )
+})
+
+test('encode/decode custom types',function(t){
+  function customType(value){
+    this.value = value
+  }
+
+  function customType2(value){
+    this.value = value
+  }
+
+_.msgpack.register(0x41,customType,
+  function(obj){
+    return new Buffer(obj.value)
+  },
+  function(obj){
+    return new customType(obj.toString())
+  }
+)
+
+_.msgpack.register(0x42,customType2,
+  function(obj){
+    return new Buffer(obj.value)
+  },
+  function(obj){
+    return new customType(obj.toString())
+  }
+)
+
+  var testArr = [
+    new customType('test1'),
+    new customType('test2'),
+    3,
+    4,
+    new Buffer('test5'),
+    'test6',
+    new customType2('test7'),
+    new Buffer('test8'),
+    2384723984345678943,
+    new customType2('test10'),
+    new customType('test11'),
+    new Buffer('test12'),
+    new customType('test13')
+  ]
   _(
     testArr,
     _.chain()
@@ -57,54 +109,3 @@ test('encode/decode custom type with a codec',function(t){
   )
 })
 
-test('encode/decode custom type with a encoder/decoder',function(t){
-  function testType(value){
-    this.value = value
-  }
-
-  _.msgpack.register(
-    _.msgpack.encoder(function(obj){
-      return obj instanceof testType
-    },
-    function(){
-      return _.chain()
-      .map(function(obj){
-        var header = new Buffer(1)
-        header.writeInt8(0x44,0)
-        return [header,JSON.stringify(obj.value)]
-      })
-      .flatten()
-    }
-    ),
-    _.msgpack.decoder(0x44,function(){
-      return _.map(function(data){
-        return new testType(JSON.parse(data))
-      })
-    })
-  )
-
-  var testArr = [
-    new testType('test1'),
-    new testType('test2'),
-    3,
-    4,
-    new Buffer('test5'),
-    'test6'
-  ]
-
-  _(
-    testArr,
-    _.chain()
-    .msgpack()
-    .encode()
-    .decode()
-    .collect(function(err,data){
-      t.equal(err,null)
-      log(data)
-      t.same(data,testArr)
-      t.end()
-    })
-  )
-
-}
-)
