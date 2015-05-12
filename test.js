@@ -21,6 +21,39 @@ test('encode/decode',function(t){
 
 })
 
+test('serializer', function (t) {
+  var testArr = [true, false, {
+    a: 'b'
+  }, 12342342342342, 2, 3, new Buffer('test*!"§')]
+  t.plan(testArr.length * 2 + 1)
+
+  var c = 0
+
+  var ds = _.msgpack.serializer({
+    source: testArr,
+    sink: _.drain(function (d) {
+      if (Buffer.isBuffer(d)) {
+        t.ok(d.equals(testArr[c]))
+      }
+      else t.deepEqual(d, testArr[c])
+      c++
+    },
+    function (err) {
+      t.equal(err, null)
+    })
+  })
+
+  _(
+    ds,
+    _.map(function (data) {
+      t.equal(Buffer.isBuffer(data), true)
+      return data
+    }),
+    ds
+  )
+
+})
+
 test('encode/decode custom type',function(t){
   function customType(value){
     this.value = value
@@ -79,7 +112,35 @@ _.msgpack.register(0x42,customType2,
   }
 )
 
-  var testArr = [
+  var testArr = [[
+    new customType('test1'),
+    new customType('test2'),
+    3,
+    4,
+    new Buffer('test5'),
+    'test6',
+    new customType2('test7'),
+    new Buffer('test8'),
+    2384723984345678943,
+    new customType2('test10'),
+    new customType('test11'),
+    new Buffer('test12'),
+    new customType('test13')
+  ],[
+    new customType('test1'),
+    new customType('test2'),
+    3,
+    4,
+    new Buffer('test5'),
+    'test6',
+    new customType2('test7'),
+    new Buffer('test8'),
+    2384723984345678943,
+    new customType2('test10'),
+    new customType('test11'),
+    new Buffer('test12'),
+    new customType('test13')
+  ],
     new customType('test1'),
     new customType('test2'),
     3,

@@ -37,6 +37,13 @@ _.mixin({
           })
         })
       }
-    })
+    }),
+
+    serializer: function (ds){
+      return {
+        source: _(ds.source,_.msgpack.encode()),
+        sink: _(_.msgpack.decode(), ds.sink)
+      }
+    }
   }
 })
