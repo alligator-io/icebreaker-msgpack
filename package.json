@@ -16,12 +16,12 @@
   "dependencies": {
     "bl": "^0.9.3",
     "looper": "^3.0.0",
-    "msgpack5": "^2.1.0"
+    "msgpack5": "^2.2.0"
   },
   "devDependencies": {
     "icebreaker": "^0.6.1",
-    "tape": "3.5.0",
-    "zuul": "2.1.1"
+    "tape": "^4.0.0",
+    "zuul": "3.0.0"
   },
   "keywords": [
     "msgpack",
