@@ -2,6 +2,8 @@ var test = require('tape')
 var _ = require('icebreaker')
 require('./index.js')
 
+var bufferEqual = require('buffer-equal')
+
 function log(item){
  console.log(JSON.stringify(item))
 }
@@ -33,7 +35,7 @@ test('serializer', function (t) {
     source: testArr,
     sink: _.drain(function (d) {
       if (Buffer.isBuffer(d)) {
-        t.ok(d.equals(testArr[c]))
+        t.equal(bufferEqual(d,testArr[c]),true)
       }
       else t.deepEqual(d, testArr[c])
       c++
@@ -46,7 +48,7 @@ test('serializer', function (t) {
   _(
     ds,
     _.map(function (data) {
-      t.equal(Buffer.isBuffer(data), true)
+      t.ok(Buffer.isBuffer(data))
       return data
     }),
     ds
@@ -117,7 +119,7 @@ _.msgpack.register(0x42,customType2,
     new customType('test2'),
     3,
     4,
-    new Buffer('test5'),
+    new Buffer('tes t.plan(testArr.length * 2 +1)t5'),
     'test6',
     new customType2('test7'),
     new Buffer('test8'),

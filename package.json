@@ -19,6 +19,7 @@
     "msgpack5": "^2.2.0"
   },
   "devDependencies": {
+    "buffer-equal": "0.0.1",
     "icebreaker": "^0.6.1",
     "tape": "^4.0.0",
     "zuul": "3.0.0"
