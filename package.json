@@ -14,15 +14,15 @@
     "url": "https://github.com/alligator-io/icebreaker-msgpack.git"
   },
   "dependencies": {
-    "bl": "^0.9.3",
+    "bl": "^1.0.0",
     "looper": "^3.0.0",
-    "msgpack5": "^2.3.0"
+    "msgpack5": "^3.0.0"
   },
   "devDependencies": {
     "buffer-equal": "0.0.1",
-    "icebreaker": "^0.6.1",
+    "icebreaker": "^0.7.0",
     "tape": "^4.0.0",
-    "zuul": "3.0.0"
+    "zuul": "^3.2.0"
   },
   "keywords": [
     "msgpack",
