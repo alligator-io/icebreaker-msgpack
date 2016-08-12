@@ -2,24 +2,42 @@ var msgpack = require('msgpack5')()
 var bl = require('bl')
 var looper = require('looper')
 var _ = require('icebreaker')
+var m = module.exports = {
+  register: msgpack.register,
+  registerEncoder: msgpack.registerEncoder,
+  registerDecoder: msgpack.registerDecoder,
 
-_.mixin({
-  msgpack: {
-    register: msgpack.register,
-    registerEncoder: msgpack.registerEncoder,
-    registerDecoder: msgpack.registerDecoder,
+  encode: function () {
+    var ended = false
 
-    encode: function () {
-      return _.asyncMap(function (chunk, callback) {
-        try {
-          callback(null, msgpack.encode(chunk, true).slice(0))
-        } catch (err) {
-          callback(err)
-        }
-      })
-    },
+    return function (read) {
+      return function (abort, callback) {
+        if (abort) return read(abort, callback)
+        if (ended) return callback(ended)
+        
 
-    decode: _.through(function (read) {
+        read(abort, function next(end, c) {
+          if (end) {
+            ended = end
+            return callback(end)
+          }
+
+          try {
+            callback(null, msgpack.encode(c,true).slice(0))
+          }
+          catch (err) {
+            ended = err
+          }
+
+          if (!ended) read(null, next)
+        })
+      }
+    }
+
+  },
+
+  decode: function () {
+    return function (read) {
       return function (abort, callback) {
         read(abort, function (end, chunk) {
           if (end) return callback(end)
@@ -37,13 +55,13 @@ _.mixin({
           })
         })
       }
-    }),
+    }
+  },
 
-    serializer: function (ds){
-      return {
-        source: _(ds.source,_.msgpack.encode()),
-        sink: _(_.msgpack.decode(), ds.sink)
-      }
+  serializer: function (ds) {
+    return {
+      source: _(ds.source, m.encode()),
+      sink: _(m.decode(), ds.sink)
     }
   }
-})
+}

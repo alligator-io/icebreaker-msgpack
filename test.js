@@ -1,6 +1,6 @@
 var test = require('tape')
 var _ = require('icebreaker')
-require('./index.js')
+var msgpack = require('./index.js')
 
 var bufferEqual = require('buffer-equal')
 
@@ -10,10 +10,9 @@ function log(item){
 
 test('encode/decode',function(t){
   var testArr  = ['test1','test2','test3',{a:'b'},1,2,3,new Buffer('test')]
-
   _(
       testArr,
-      _.chain().msgpack().encode().decode().collect(function(err,data){
+        msgpack.encode(),msgpack.decode(),_.collect(function(err,data){
         t.equal(err,null)
         t.same(data,testArr)
         log(data)
@@ -31,7 +30,7 @@ test('serializer', function (t) {
 
   var c = 0
 
-  var ds = _.msgpack.serializer({
+  var ds = msgpack.serializer({
     source: testArr,
     sink: _.drain(function (d) {
       if (Buffer.isBuffer(d)) {
@@ -61,7 +60,7 @@ test('encode/decode custom type',function(t){
     this.value = value
   }
 
-_.msgpack.register(0x41,customType,
+msgpack.register(0x41,customType,
   function(obj){
     return new Buffer(obj.value)
   },
@@ -73,11 +72,9 @@ _.msgpack.register(0x41,customType,
 var testArr = [new customType('A'),new customType('B'), new customType('C')]
   _(
     testArr,
-    _.chain()
-    .msgpack()
-    .encode()
-    .decode()
-    .collect(function(err,data){
+    msgpack.encode(),
+    msgpack.decode(),
+    _.collect(function(err,data){
       console.log(err,data)
       t.equal(err,null)
       t.same(data,testArr)
@@ -96,7 +93,7 @@ test('encode/decode custom types',function(t){
     this.value = value
   }
 
-_.msgpack.register(0x41,customType,
+msgpack.register(0x41,customType,
   function(obj){
     return new Buffer(obj.value)
   },
@@ -105,7 +102,7 @@ _.msgpack.register(0x41,customType,
   }
 )
 
-_.msgpack.register(0x42,customType2,
+msgpack.register(0x42,customType2,
   function(obj){
     return new Buffer(obj.value)
   },
@@ -159,11 +156,9 @@ _.msgpack.register(0x42,customType2,
   ]
   _(
     testArr,
-    _.chain()
-    .msgpack()
-    .encode()
-    .decode()
-    .collect(function(err,data){
+    msgpack.encode(),
+     msgpack.decode(),
+    _.collect(function(err,data){
       t.equal(err,null)
       t.same(data,testArr)
       log(data)
