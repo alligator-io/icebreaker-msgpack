@@ -1,0 +1,40 @@
+{
+  "name": "icebreaker-msgpack",
+  "version": "1.1.0",
+  "description": "MessagePack v5 as pull-stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "node scripts/test",
+    "test-local": "node node_modules/.bin/tape test.js",
+    "test-browser": "node_modules/.bin/zuul --open --local 8087 -- test.js",
+    "test-zuul": "node_modules/.bin/zuul -- test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alligator-io/icebreaker-msgpack.git"
+  },
+  "dependencies": {
+    "bl": "^0.9.3",
+    "looper": "^3.0.0",
+    "msgpack5": "^2.2.0"
+  },
+  "devDependencies": {
+    "buffer-equal": "0.0.1",
+    "icebreaker": "^0.6.1",
+    "tape": "^4.0.0",
+    "zuul": "3.0.0"
+  },
+  "keywords": [
+    "msgpack",
+    "pull-stream",
+    "icebreaker",
+    "msgpack",
+    "streams"
+  ],
+  "author": "Markus Wunderlin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alligator-io/icebreaker-msgpack/issues"
+  },
+  "homepage": "https://github.com/alligator-io/icebreaker-msgpack"
+}
