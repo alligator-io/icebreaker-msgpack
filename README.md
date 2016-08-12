@@ -17,9 +17,10 @@ npm install --save icebreaker-msgpack
 ## Example
 ```javascript
 var _ = require('icebreaker')
-require('icebreaker-msgpack')
+var msgpack = require('icebreaker-msgpack')
 
-_(['a','b',1,2,3],_.msgpack.encode(),_.msgpack.decode(),_.log())
+_(['a','b',1,2,3],msgpack.encode(),msgpack.decode(),_.log())
+
 ```
 ## License
 
