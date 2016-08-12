@@ -24,7 +24,3 @@ scripts:
   - "https://rawgit.com/alligator-io/icebreaker/master/dist/icebreaker.min.js"
 browserify:
   - exclude: icebreaker
-  - ignore: ws
-  - ignore: os
-  - ignore: net
-  - ignore: dns
