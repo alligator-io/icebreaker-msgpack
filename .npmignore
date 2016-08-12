@@ -7,3 +7,4 @@ bower.json
 appveyor.yml
 .travis.yml
 .zuul.yml
+test.js
