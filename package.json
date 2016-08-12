@@ -20,9 +20,9 @@
     "msgpack5": "^3.4.0"
   },
   "devDependencies": {
-    "buffer-equal": "0.0.1",
-    "tape": "^4.4.0",
-    "zuul": "^3.2.0"
+    "buffer-equal": "^1.0.0",
+    "tape": "^4.6.0",
+    "zuul": "^3.10.3"
   },
   "keywords": [
     "msgpack",
