@@ -1,5 +1,5 @@
 var test = require('tape')
-var _ = require('icebreaker')
+var _ = typeof icebreaker ==='function'?icebreaker : require('icebreaker');
 var msgpack = require('./index.js')
 
 var bufferEqual = require('buffer-equal')
