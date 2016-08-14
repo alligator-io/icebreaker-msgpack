@@ -1,7 +1,8 @@
 var msgpack = require('msgpack5')()
 var bl = require('bl')
 var looper = require('looper')
-var _ = require('icebreaker')
+var _ = typeof icebreaker ==='function'?icebreaker : require('icebreaker');
+
 var m = module.exports = {
   register: msgpack.register,
   registerEncoder: msgpack.registerEncoder,
